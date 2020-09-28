@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react'
 // Api
 import { airportApi, url } from '../../services/airports';
 
+// Utils
+import { buildGraph } from '../../utils/buildGraph';
+
 // Style
 import { Form, FormGroup, Button, Input, Col, Row, Label } from 'reactstrap';
 import './styles.css';
@@ -10,6 +13,8 @@ import './styles.css';
 const Search = () => {
   
     const [airports, setAirports] = useState([]);
+    const [origin, setOrigin] = useState({});
+    const [destiny, setDestiny] = useState({});
 
     const fetch = async () => {
         const response = await airportApi.get(url);
@@ -18,7 +23,7 @@ const Search = () => {
 
     useEffect(() => { fetch() }, []);
 
-    console.log(airports);
+    let graph = buildGraph(airports);
 
     return (
         <div className="container">
@@ -27,12 +32,32 @@ const Search = () => {
                 <Row form >
                     <Col md={6}>
                     <FormGroup>
-                        <Input type="origin" name="origin" id="origin" placeholder="Origem..." />
+                        <Input onChange={(event) => setOrigin(event.target.value)} value={origin} type="select" name="origin" id="exampleSelect" placeholder="Origem..." >
+                            {
+                                airports.length && airports.map(airport => 
+                                    (
+                                        <option key={airport['Airport ID']} value={airport['City']}>
+                                            {`${airport['City']} (${ airport['Country']})`}
+                                        </option>
+                                    )
+                                )
+                            }
+                        </Input>
                     </FormGroup>
                     </Col>
                     <Col md={6}>
                     <FormGroup>
-                        <Input type="password" name="password" id="examplePassword" placeholder="Destino..." />
+                        <Input value={destiny} type="select" name="select" id="exampleSelect" placeholder="Destino..." >
+                            {
+                                airports.length && airports.map(airport => 
+                                    (
+                                        <option key={airport['Airport ID']} value={airport}>
+                                            {`${airport['City']} (${ airport['Country']})`}
+                                        </option>
+                                    )
+                                )
+                            }
+                        </Input>
                     </FormGroup>
                     </Col>
                 </Row>
