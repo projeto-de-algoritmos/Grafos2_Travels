@@ -2,8 +2,7 @@ const distance = (x1, y1, x2, y2) => {
     return Math.sqrt(Math.pow((x1 - x2), 2) +((y1 - y2), 2));
 }
 
-const buildGraph = (airports) => {
-    let graph = {};
+const hashAirports = (airports) => {
     let hashAirport = {};
 
     airports.forEach(airport => {
@@ -12,6 +11,13 @@ const buildGraph = (airports) => {
         }
     });
 
+    return hashAirport;
+};
+
+const buildGraph = (airports) => {
+    let graph = {};
+    let hashAirport = hashAirports(airports);
+ 
     if(hashAirport[1]) {
         airports.forEach(airport => {
             airport['destinations'].forEach(destination => {
@@ -33,4 +39,4 @@ const buildGraph = (airports) => {
 }
 
 export default buildGraph;
-export { buildGraph };
+export { buildGraph, hashAirports };
