@@ -1,30 +1,21 @@
 **!! Atenção: Renomeie o seu repositório para (Tema)_(NomeDoProjeto). !!** 
 
 Temas:
- - Grafos1
  - Grafos2
- - PD
- - D&C
- - Greed
- - Final 
- 
- **!! *Não coloque os nomes dos alunos no título do repositório*. Exemplo de título correto: Grafos2_Labirinto-do-Minotauro !!**
- 
- (Apague essa seção)
-
-# NomedoProjeto
+  
+# Travels
 
 **Número da Lista**: X<br>
-**Conteúdo da Disciplina**: XXXXXXXXXX<br>
+**Conteúdo da Disciplina**: Dijkstra - Shortest path problem <br>
 
 ## Alunos
 |Matrícula | Aluno |
 | -- | -- |
-| 17/0033112  |  Eugenio Sales |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
-
+| 17/0138551  |  Bruno Henrique Sousa Duarte |
+| 17/0033112  |  Eugenio Sales Siqueira |
+	
 ## Sobre 
-Descreva os objetivos do seu projeto e como ele funciona. 
+Aplicação web que apresenta a melhor escala de aeroportos dados um de saída e chegada. Além disso, informa os voos disponíveis com o itinerário de aeroportos apresentado pelo menor caminho, baseado na distância entre os aeroportos.
 
 ## Screenshots
 Adicione 3 ou mais screenshots do projeto em funcionamento.

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { airportApi, url } from '../../services/airports';
 
 // Utils
-import { buildGraph } from '../../utils/buildGraph';
+import { dijkstra } from '../../utils/dijkstra';
 
 // Style
 import { Form, FormGroup, Button, Input, Col, Row, Label } from 'reactstrap';
@@ -13,8 +13,8 @@ import './styles.css';
 const Search = () => {
   
     const [airports, setAirports] = useState([]);
-    const [origin, setOrigin] = useState({});
-    const [destiny, setDestiny] = useState({});
+    const [departure, setDeparture] = useState(0);
+    const [arrival, setArrival] = useState(0);
 
     const fetch = async () => {
         const response = await airportApi.get(url);
@@ -23,21 +23,40 @@ const Search = () => {
 
     useEffect(() => { fetch() }, []);
 
-    let graph = buildGraph(airports);
+    
+    const handleSubmit = () => {
+
+        if(departure !== -1 && arrival !== -1) {
+           const res = dijkstra(airports, departure, arrival);
+
+        }
+    }
 
     return (
         <div className="container">
             <h2 className="font-weight-bold text-center"> Qual o próximo destino? </h2>
-            <Form style={{ width: "800px" }}>
+            <Form onSubmit={(e) =>{
+                e.preventDefault();
+                handleSubmit();
+            }} style={{ width: "800px" }}>
                 <Row form >
                     <Col md={6}>
                     <FormGroup>
-                        <Input onChange={(event) => setOrigin(event.target.value)} value={origin} type="select" name="origin" id="exampleSelect" placeholder="Origem..." >
+                        <Input 
+                            onChange={(event) => {
+                                setDeparture(event.target.value);
+                            }} 
+                            type="select" 
+                            name="departure" 
+                            value={departure}
+                            id="departure"
+                            required={true} 
+                            placeholder="Origem..." >
                             {
-                                airports.length && airports.map(airport => 
+                                airports.length && airports.map((airport, index) => 
                                     (
-                                        <option key={airport['Airport ID']} value={airport['City']}>
-                                            {`${airport['City']} (${ airport['Country']})`}
+                                        <option key={index} value={airport['Airport ID']}>
+                                            {` ${airport['Name']} (${airport['City']} - ${ airport['Country']})`}
                                         </option>
                                     )
                                 )
@@ -47,12 +66,21 @@ const Search = () => {
                     </Col>
                     <Col md={6}>
                     <FormGroup>
-                        <Input value={destiny} type="select" name="select" id="exampleSelect" placeholder="Destino..." >
+                        <Input 
+                            onChange={(event) => {
+                                setArrival(event.target.value);
+                            }} 
+                            type="select" 
+                            name="arrival"
+                            required={true} 
+                            value={arrival}
+                            id="arrival" 
+                            placeholder="Origem..." >
                             {
-                                airports.length && airports.map(airport => 
+                                airports.length && airports.map((airport, index) => 
                                     (
-                                        <option key={airport['Airport ID']} value={airport}>
-                                            {`${airport['City']} (${ airport['Country']})`}
+                                        <option key={index} value={airport['Airport ID']}>
+                                            {` ${airport['Name']} (${airport['City']} - ${ airport['Country']})`}
                                         </option>
                                     )
                                 )
