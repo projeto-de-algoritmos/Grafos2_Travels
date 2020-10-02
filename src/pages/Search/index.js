@@ -5,12 +5,13 @@ import { airportApi, url } from '../../services/airports';
 
 // Utils
 import { dijkstra } from '../../utils/dijkstra';
+import { hashAirports } from '../../utils/buildGraph';
 
 // Style
 import { Form, FormGroup, Button, Input, Col, Row, Label } from 'reactstrap';
 import './styles.css';
 
-const Search = () => {
+const Search = ({ airportsPath }) => {
   
     const [airports, setAirports] = useState([]);
     const [departure, setDeparture] = useState(0);
@@ -22,23 +23,23 @@ const Search = () => {
     }
 
     useEffect(() => { fetch() }, []);
-
     
     const handleSubmit = () => {
 
         if(departure !== -1 && arrival !== -1) {
-           const res = dijkstra(airports, departure, arrival);
-
+           const path = dijkstra(airports, departure, arrival);
+           airportsPath({ path, hashAirports: hashAirports(airports) });
         }
     }
 
     return (
+        <div className="background">
         <div className="container">
             <h2 className="font-weight-bold text-center"> Qual o próximo destino? </h2>
             <Form onSubmit={(e) =>{
                 e.preventDefault();
                 handleSubmit();
-            }} style={{ width: "800px" }}>
+            }} style={{ width: "100%" }}>
                 <Row form >
                     <Col md={6}>
                     <FormGroup>
@@ -92,7 +93,9 @@ const Search = () => {
                 <Button color="primary" >Pesquisar</Button>
             </Form>
         </div>
+        </div>
     )
 }
 
 export default Search;
+export { Search };

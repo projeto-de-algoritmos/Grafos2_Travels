@@ -1,12 +1,17 @@
 import React, { useState } from 'react'
+import { WrappedMap } from '../../components/googleMaps';
 
-const Itinerary = () => {
-  
+// Styles
+import './styles.css';
+
+const Itinerary = ({ itinerary }) => {
+
   return (
-    <div className="Contact">
-        Olasd
+    <div className="">
+        <WrappedMap itinerary={itinerary} />
     </div>
   )
 }
 
 export default Itinerary;
+export { Itinerary };

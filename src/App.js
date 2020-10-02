@@ -1,15 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // Pages
-import Search from './pages/Search';
+import { Search } from './pages/Search';
+import { Itinerary } from './pages/Itinerary';
 
 // Style
 import './App.css';
 
 function App() {
+
+  const [itinerary, setItinerary] = useState([]);
+
+  const airportsPath = (data) => {
+    const { path, hashAirports } = data;
+    let airports = path.map(airport => hashAirports[airport]);
+    setItinerary(airports);
+  }
+
+
+  if(itinerary.length) {
+    return (
+      <div className="App">
+        <Itinerary itinerary={itinerary} />
+      </div>
+    );
+  }
+
   return (
     <div className="App">
-      <Search />
+      <Search airportsPath={(data) => airportsPath(data)} />
     </div>
   );
 }
