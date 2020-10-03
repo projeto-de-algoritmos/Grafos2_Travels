@@ -20,7 +20,7 @@ function App() {
 
   if(itinerary.length) {
     return (
-      <div className="App">
+      <div style={{ marginTop: '-240px' }} className="App">
         <Itinerary itinerary={itinerary} />
       </div>
     );

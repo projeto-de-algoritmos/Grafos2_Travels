@@ -8,7 +8,7 @@ import { dijkstra } from '../../utils/dijkstra';
 import { hashAirports } from '../../utils/buildGraph';
 
 // Style
-import { Form, FormGroup, Button, Input, Col, Row, Label } from 'reactstrap';
+import { Form, FormGroup, Button, Input, Col, Row } from 'reactstrap';
 import './styles.css';
 
 const Search = ({ airportsPath }) => {

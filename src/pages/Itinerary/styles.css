@@ -9,7 +9,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 300px auto auto;
+    margin-top: '-20%';
 }
 
 .container h2 {

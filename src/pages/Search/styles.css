@@ -13,6 +13,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 300px auto auto;
 }
 
 .container h2 {
